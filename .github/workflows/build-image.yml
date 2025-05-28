@@ -48,17 +48,8 @@ jobs:
             sha256sum amzn2-kvm-${{ env.version }}-x86_64.xfs.gpt.qcow2
           } > checksums.txt
           
-          # Extract individual checksums for backward compatibility
-          md5sum amzn2-kvm-${{ env.version }}-x86_64.xfs.gpt.qcow2 > md5.txt
-          sha1sum amzn2-kvm-${{ env.version }}-x86_64.xfs.gpt.qcow2 > sha1.txt
-          sha256sum amzn2-kvm-${{ env.version }}-x86_64.xfs.gpt.qcow2 > sha256.txt
-          
-          # Copy files to shared volume for artifact upload
-          cp amzn2-kvm-${{ env.version }}-x86_64.xfs.gpt.qcow2 /shared/
-          cp checksums.txt /shared/
-          cp md5.txt /shared/
-          cp sha1.txt /shared/
-          cp sha256.txt /shared/
+          cp amzn2-kvm-${{ env.version }}-x86_64.xfs.gpt.qcow2 /shared
+          cp checksums.txt /shared
       
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -67,9 +58,6 @@ jobs:
           path: |
             amzn2-kvm-${{ env.version }}-x86_64.xfs.gpt.qcow2
             checksums.txt
-            md5.txt
-            sha1.txt
-            sha256.txt
 
   deploy:
     needs: build
