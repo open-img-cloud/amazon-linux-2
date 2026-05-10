@@ -1,0 +1,16 @@
+name: Watch upstream
+
+on:
+  schedule:
+    - cron: '35 6 * * *'   # daily 06:35 UTC, ~7-8am Europe/Zurich (offset from alpaquita 17, alpine 23, AL2023 29)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  watch:
+    uses: open-img-cloud/.github/.github/workflows/upstream-watch.yml@main
+    with:
+      os_name: amazon-linux-2
