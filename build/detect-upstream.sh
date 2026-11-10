@@ -8,7 +8,7 @@
 # directory; we follow the redirect and extract the version segment.
 # Format: 2.0.YYYYMMDD.N.
 #
-# Runs in the upstream-watch reusable workflow (no KVM needed) — keep
+# Runs in the upstream-watch reusable workflow (no KVM needed): keep
 # it portable bash + curl only.
 
 set -euo pipefail
@@ -17,7 +17,7 @@ URL='https://cdn.amazonlinux.com/os-images/latest/'
 
 location=$(curl -fsI "$URL" | awk -F': ' 'tolower($1)=="location"{sub(/\r$/,"",$2); print $2; exit}')
 if [[ -z "${location:-}" ]]; then
-  echo "::error::no Location header on $URL — upstream may have changed the layout" >&2
+  echo "::error::no Location header on $URL, upstream may have changed the layout" >&2
   exit 1
 fi
 

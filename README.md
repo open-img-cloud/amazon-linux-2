@@ -23,7 +23,7 @@
   </p>
 </div>
 
-> **⚠️ Archived — Amazon Linux 2 reached AWS standard end-of-life on
+> **⚠️ Archived: Amazon Linux 2 reached AWS standard end-of-life on
 > 2025-06-30.** AWS continues publishing image updates for clients on
 > [extended support][al2-eol], and this repo rebuilds them through the
 > openimages.cloud signed-release pipeline for the same audience. New
@@ -51,7 +51,7 @@ Customisations applied to the upstream rootfs:
 - **`virt-sysprep`** to clean transient state, then `virt-sparsify --compress`
 
 The upstream AL2 image already ships cloud-init, openssh-server, GRUB2
-with serial console wired, and the `ec2-user` default user — we don't
+with serial console wired, and the `ec2-user` default user: we don't
 override any of that.
 
 Each release publishes:
@@ -89,7 +89,7 @@ cosign verify-blob \
 ```
 
 The certificate identity points at the **reusable** build workflow in
-`open-img-cloud/.github` — that's where GitHub's OIDC binds the SAN for
+`open-img-cloud/.github`: that's where GitHub's OIDC binds the SAN for
 keyless signing. To tie the artifact back to *this* repo's commit, also
 check `MANIFEST.json` (commit, build_url, builder digest).
 
@@ -161,7 +161,7 @@ Distributed under the GPL-2.0 License. See `LICENSE`.
 
 ## Contact
 
-Kevin Allioli — kevin@stackops.ch · [@stackopshq](https://twitter.com/stackopshq)
+Kevin Allioli · kevin@stackops.ch · [@stackopshq](https://twitter.com/stackopshq)
 
 Project: [open-img-cloud/amazon-linux-2](https://github.com/open-img-cloud/amazon-linux-2)
 
