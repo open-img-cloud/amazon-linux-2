@@ -54,6 +54,7 @@ jobs:
       # 302-redirects to the versioned dir; we hardcode the xfs.gpt
       # naming and the resolved version below.
       upstream_url: 'https://cdn.amazonlinux.com/os-images/${{ needs.resolve-version.outputs.version }}/kvm/amzn2-kvm-${{ needs.resolve-version.outputs.version }}-x86_64.xfs.gpt.qcow2'
+      upstream_checksum_url: 'https://cdn.amazonlinux.com/os-images/${{ needs.resolve-version.outputs.version }}/kvm/SHA256SUMS'
       decompress: none
       customize_script: build/customize.sh
       run_sysprep: true
