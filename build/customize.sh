@@ -25,7 +25,14 @@ fi
 
 echo "[customize] target: $QCOW2"
 
+# Slow DHCP: network-scripts start dhclient with -1 (one attempt, 60 s
+# timeout by default), so where DHCP takes longer (over 2 minutes measured
+# in Infomaniak dc4-a) the instance never got IPv4 and SSH never opened.
+# Keep dhclient running in the background (PERSISTENT_DHCLIENT, read from
+# /etc/sysconfig/network by ifup-eth) and give it 5 minutes.
 virt-customize -a "$QCOW2" \
+  --run-command 'grep -q "^PERSISTENT_DHCLIENT=" /etc/sysconfig/network || echo "PERSISTENT_DHCLIENT=yes" >> /etc/sysconfig/network' \
+  --run-command 'touch /etc/dhcp/dhclient.conf && (grep -q "^timeout " /etc/dhcp/dhclient.conf || echo "timeout 300;" >> /etc/dhcp/dhclient.conf)' \
   --run-command 'rm -rf /var/cache/dnf /var/cache/yum /tmp/* /var/tmp/*'
 
 echo "[customize] done"
